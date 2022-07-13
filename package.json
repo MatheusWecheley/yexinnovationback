@@ -1,32 +1,33 @@
 {
-  "name": "yex-innovation-server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest",
-    "dev": "tsnd --transpile-only --exit-child --respawn --ignore-watch node_modules src/server.ts",
-    "start": "ts-node src/graphqlServer.ts"
-  },
-  "author": "yex-innovation",
-  "license": "MIT",
-  "dependencies": {
-    "apollo-server": "^3.10.0",
-    "graphql": "^16.5.0",
-    "mongodb": "^3.7.3",
-    "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.7",
-    "uuid": "^8.3.2",
-    "yarn": "^1.22.19"
-  },
-  "devDependencies": {
-    "ts-node": "^10.8.2",
-    "@types/node": "^18.0.3",
-    "@types/typescript": "^2.0.0",
-    "@types/uuid": "^8.3.4",
-    "ts-node-dev": "^2.0.0",
-    "@types/jest": "^28.1.0",
-    "jest": "^28.1.0",
-    "typescript": "^4.7.4"
-  }
+   "name": "yex-innovation-server",
+   "version": "1.0.0",
+   "description": "",
+   "main": "index.js",
+   "scripts": {
+      "test": "jest",
+      "dev": "tsnd --transpile-only --exit-child --respawn --ignore-watch node_modules src/server.ts",
+      "start": "ts-node src/index.ts",
+      "typeorm": "typeorm-ts-node-commonjs"
+   },
+   "author": "yex-innovation",
+   "license": "MIT",
+   "dependencies": {
+      "apollo-server": "^3.10.0",
+      "graphql": "^16.5.0",
+      "mongodb": "^3.0.8",
+      "reflect-metadata": "^0.1.13",
+      "typeorm": "0.3.7",
+      "uuid": "^8.3.2",
+      "yarn": "^1.22.19"
+   },
+   "devDependencies": {
+      "ts-node": "10.7.0",
+      "@types/node": "^16.11.10",
+      "@types/typescript": "^2.0.0",
+      "@types/uuid": "^8.3.4",
+      "ts-node-dev": "^2.0.0",
+      "@types/jest": "^28.1.0",
+      "jest": "^28.1.0",
+      "typescript": "4.5.2"
+   }
 }

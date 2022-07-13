@@ -1,11 +1,11 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
+import { User } from "../services/entitiy/users/User"
+
 
 export const AppDataSource = new DataSource({
     type: "mongodb",
-    database: "test",
-    synchronize: true,
-    logging: ['query', 'error'],
-    migrations: [],
-    subscribers: [],
+    database: "yex",
+    host: "localhost",
+    port: 27017,
 })
