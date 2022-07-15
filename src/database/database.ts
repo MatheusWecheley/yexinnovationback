@@ -1,11 +1,10 @@
-import "reflect-metadata"
-import { DataSource } from "typeorm"
-import { User } from "../services/entitiy/users/User"
+const mongoose = require('mongoose');
+mongoose.Promise = Promise;
 
+mongoose.connect('mongodb://localhost/1_0', { 
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => console.log('Connected to Mongoose Sucess!'))
+.catch((err) => console.error(err))
 
-export const AppDataSource = new DataSource({
-    type: "mongodb",
-    database: "yex",
-    host: "localhost",
-    port: 27017,
-})
+export {mongoose}

@@ -1,19 +1,21 @@
-import { User } from "../entitiy/users/User"
-import { getMongoManager, getRepository } from "typeorm"
+const User = require('../models/users/User')
+
 
 
 const resvolvers = {
     Query: {
-
+        users() {
+            return User.find();
+        },
+        user(_,{id}) {
+            return User.findById(id)
+        }
     },
     Mutation: {
-        async createUser(_, {userInput: {name, lastName}}) {
-           const user = new User();
-           user.firstName = name;
-           user.lastName = lastName;
-        //    const manager = getMongoManager();
-           const txt = getRepository(test)
-           await txt.save(user);
+        async createUser(_, {user}) {
+           const newUser = new User(user) 
+           
+           return await newUser.save()
         }
     }
 }
