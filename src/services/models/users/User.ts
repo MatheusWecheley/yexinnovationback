@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-
-const numberValidator = /\d{2}-\d{4}-\d{4}/
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const secret = process.env.JWT_TOKEN;
 
 const UserSchema = mongoose.Schema({
     name: {type: String},
@@ -11,5 +12,8 @@ const UserSchema = mongoose.Schema({
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now },
 })
+
+
+
 
 module.exports = mongoose.model('User', UserSchema);

@@ -22,6 +22,9 @@ const types = gql`
   input UserInput {
     name: String
     lastName: String
+    phone: Int
+    email: String 
+    password: String
   }
 `;
 
