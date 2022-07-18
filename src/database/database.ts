@@ -7,4 +7,4 @@ mongoose.connect('mongodb://localhost/1_0', {
 }).then(() => console.log('Connected to Mongoose Sucess!'))
 .catch((err) => console.error(err))
 
-export {mongoose}
+export default {mongoose}

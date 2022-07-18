@@ -14,7 +14,7 @@ const resvolvers = {
     Mutation: {
         async createUser(_, {user}) {
            const newUser = new User(user) 
-           
+           const sucess = "User registered success!"
            return await newUser.save()
         }
     }
