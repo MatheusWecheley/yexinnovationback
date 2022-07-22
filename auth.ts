@@ -1,5 +1,6 @@
-import jwt from 'jsonwebtoken';
+const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+require("dotenv").config();
 
 
 export const hashedPassword = (password: string) => {
@@ -29,7 +30,7 @@ export const verifyToken = (token: string) => {
         if(token) {
             return jwt.verify(token, process.env.JWT_TOKEN);
         }
-        return null
+        return "null"
     }catch (err) {
         return null
     }

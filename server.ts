@@ -1,6 +1,6 @@
 import { ApolloServer } from 'apollo-server';
 const typeDefs = require('./src/services/graphql/typeDefs')
-import resolvers from './src/services/graphql/resvolvers'
+import resolvers from './src/services/graphql/resolvers'
 require('./src/database/database')
 
 

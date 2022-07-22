@@ -20,28 +20,13 @@ const types = gql`
 
   type ClientFilter {
     limit: Int
-    node: [clientsFilter]
-  }
-
-  type ClientsConnection {
-    pageInfo: PageInfo!
-    totalCountL: Int!
-    nodes: [clients!]!
-  }
-
-  input ClientInput {
-    socialReason: String!
-    cnpj: String!
-    address: Address!
-    phone: String!
-    logo: String
   }
 
   input ClientUpdateInput {
     id: ID!
     socialReason: String
     cnpj: String
-    address: Address
+    address: String
     phone: String
     logo: String
   }
@@ -54,6 +39,14 @@ const types = gql`
     complement: String
     state: String!
     city: String!
+  }
+
+  input ClientInput {
+    socialReason: String!
+    cnpj: String!
+    address: String
+    phone: String!
+    logo: String
   }
 
   type Client {
@@ -74,12 +67,12 @@ const types = gql`
     listClients(
       first: Int
       after: String
-      clientsFilter: ClientsFilter
-    ): ClientsConnection
+    ): [Client]
   }
 
   type Mutation {
-    createUser(user: UserInput): User
+    createUsers(user: UserInput): User!
+    login(user: UserInput): Boolean
     addClient(clientInput: ClientInput!): Boolean
     updateClient(clientUpdateInput: ClientUpdateInput!): Boolean
     deleteClient(id: ID!): Boolean

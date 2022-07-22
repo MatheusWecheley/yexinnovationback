@@ -1,9 +1,12 @@
-const User = require('../models/users/User');
+const User = require('../schemas/user/User');
 import {
   hashedPassword,
   decryptedPassword,
   createToken,
 } from '../../../auth';
+import {Users} from '../models/client/User'
+
+
 
 const resolvers = {
   Query: {
@@ -15,30 +18,11 @@ const resolvers = {
     },
   },
   Mutation: {
-    createUser: async (_, { user }) => {
-      try {
-        const userVerify = await User.findOne({
-          email: user.email,
-        });
-        if (userVerify) {
-          throw new Error(`User has existed`);
-        }
-        const newUser = await new User({
-          name: user.name,
-          lastName: user.lastName,
-          email: user.email,
-          phone: user.phone,
-          password: await hashedPassword(user.password),
-        });
-        const token = createToken({
-          id: newUser.id,
-          email: newUser.email,
-        });
-        return { token, user };
-      } catch (err) {
-        throw new Error(err.message);
-      }
+    createUsers: (_, { user }) => {
+      var usr = new Users();
+      usr.createUser({user})
     },
+    
     login: async (_, { email, password }) => {
       try {
         const user = await User.findOne({ email });
