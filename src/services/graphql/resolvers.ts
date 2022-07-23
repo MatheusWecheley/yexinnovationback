@@ -1,51 +1,29 @@
 const User = require('../schemas/user/User');
-import {
-  hashedPassword,
-  decryptedPassword,
-  createToken,
-} from '../../../auth';
-import {Users} from '../models/client/User'
-
+import {Users} from '../models/user/User'
+import { Login } from '../models/user/userLogin';
 
 
 const resolvers = {
   Query: {
-    async users() {
+    users: async (_, args, { auth }) => {
+      if(!auth) throw new Error("You don't have authorization!")
       return await User.find();
     },
-    user(_, { id }) {
+    user(_, { id }, {auth}) {
+      if(!auth) throw new Error("You don't have authorization!")
       return User.findById(id);
     },
   },
   Mutation: {
-    createUsers: (_, { user }) => {
-      var usr = new Users();
-      usr.createUser({user})
+    createUsers: async (_, { user }, {auth}) => {
+      if(!auth) throw new Error("You don't have authorization!")
+      const newUser = new Users();
+      return await newUser.createUser({user})
     },
     
     login: async (_, { email, password }) => {
-      try {
-        const user = await User.findOne({ email });
-        if (!user) {
-          throw new Error('User or email incorrect!');
-        }
-
-        const validPassword = await decryptedPassword(
-          password,
-          user.password
-        );
-        if (!validPassword) {
-          throw new Error('User or email incorrect!');
-        }
-
-        const token = createToken({
-          id: user.id,
-          email: user.email,
-        });
-        return { token, user };
-      } catch (error) {
-        throw new Error(error.message);
-      }
+      const loginUser = new Login()
+      loginUser.userLogin({email, password});
     },
   },
 };

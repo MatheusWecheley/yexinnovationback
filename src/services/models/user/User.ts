@@ -1,8 +1,5 @@
 const User = require('../../schemas/user/User');
-import {
-    hashedPassword,
-    createToken,
-  } from '../../../../auth';
+import {hashedPassword,createToken,} from '../../../../auth';
 
 
 export class Users  {
@@ -25,8 +22,8 @@ export class Users  {
               id: newUser.id,
               email: newUser.email,
             });
-            newUser.save()
-            return token;
+            await newUser.save()
+            return {token, newUser};
         } catch (err) {
             throw new Error(err.message);
           }

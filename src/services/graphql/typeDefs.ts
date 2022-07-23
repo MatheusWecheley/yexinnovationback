@@ -60,6 +60,11 @@ const types = gql`
     feedbacks: [String]
   }
 
+  type AuthUser {
+    token: String!
+    newUser: User!
+  }
+
   type Query {
     users: [User]
     user(id: ID!): User
@@ -71,8 +76,8 @@ const types = gql`
   }
 
   type Mutation {
-    createUsers(user: UserInput): User!
-    login(user: UserInput): Boolean
+    createUsers(user: UserInput): AuthUser!
+    login(email: String!, senha: String!): AuthUser!
     addClient(clientInput: ClientInput!): Boolean
     updateClient(clientUpdateInput: ClientUpdateInput!): Boolean
     deleteClient(id: ID!): Boolean
