@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+import {verify} from 'jsonwebtoken'
 const crypto = require('crypto');
 require("dotenv").config();
 
@@ -28,7 +29,8 @@ export const createToken = (payload: object) => jwt.sign(payload, process.env.JW
 export const verifyToken = (token: string) => {
     try {
         if(token) {
-            return jwt.verify(token, process.env.JWT_TOKEN);
+            const result = verify(token, process.env.JWT_TOKEN);
+            return result;
         }
         return "null"
     }catch (err) {

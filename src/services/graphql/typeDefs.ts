@@ -1,7 +1,15 @@
 const { gql } = require('apollo-server');
 
 const types = gql`
-  type User {
+  directive @auth(requires: Role = ADMIN) on OBJECT | FIELD_DEFINITION
+
+  enum Role {
+    ADMIN
+    REVIEWER
+    USER
+  }
+
+  type User @auth(requires: USER){
     id: ID!
     name: String!
     lastName: String!
@@ -77,6 +85,7 @@ const types = gql`
 
   type Mutation {
     createUsers(user: UserInput): AuthUser!
+    updateUser(id: String, user: UserInput): AuthUser
     login(email: String!, senha: String!): AuthUser!
     addClient(clientInput: ClientInput!): Boolean
     updateClient(clientUpdateInput: ClientUpdateInput!): Boolean

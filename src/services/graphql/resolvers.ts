@@ -5,18 +5,17 @@ import { Login } from '../models/user/userLogin';
 
 const resolvers = {
   Query: {
-    users: async (_, args, { auth }) => {
-      if(!auth) throw new Error("You don't have authorization!")
+    users: async (_, args,  context) => {
+      if(!context.user) throw new Error("You don't have authorization!")
       return await User.find();
     },
-    user(_, { id }, {auth}) {
-      if(!auth) throw new Error("You don't have authorization!")
-      return User.findById(id);
+    user: async (_, { id }, context) => {
+      if(!context.user) throw new Error("You don't have authorization!")
+      return await User.findById(id);
     },
   },
   Mutation: {
-    createUsers: async (_, { user }, {auth}) => {
-      if(!auth) throw new Error("You don't have authorization!")
+    createUsers: async (_, { user }) => {
       const newUser = new Users();
       return await newUser.createUser({user})
     },

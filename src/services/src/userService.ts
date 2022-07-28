@@ -1,7 +1,9 @@
 const User = require('../schemas/user/User')
-import {hashedPassword,decryptedPassword,createToken, } from '../../../auth';
+import {UserInput, Users} from '../models/user/User'
 
 
 export interface IUserInterface {
-    createUser: () => string
+    createUser(user: {user: any}): Promise<object | string>;
+
+    updateUser(id: string, userInput: UserInput): Promise<boolean | object>;
 }
