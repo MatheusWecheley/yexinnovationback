@@ -1,20 +1,20 @@
 import { Client } from '../models/client/Client';
 
 export interface IClientService {
-  addClient(client: Client): boolean;
+  addClient(client: Client): Promise<boolean>;
 
   updateClient(
     id: string,
     fieldsToUpdate: Partial<Client>
-  ): boolean;
+  ): Promise<boolean>;
 
-  deleteClient(id: string): boolean;
+  deleteClient(id: string): Promise<boolean>;
 
-  getClient(id: string): Client;
+  getClient(id: string): Promise<Client>;
 
   listClients(
     first: number,
     after: string,
     filter: Partial<Client>
-  ): Client[];
+  ): Promise<Client[]>;
 }
