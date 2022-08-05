@@ -1,6 +1,7 @@
 const User = require('../schemas/user/User');
 import {Users} from '../models/user/User'
 import { Login } from '../models/user/userLogin';
+import {Products} from '../models/product/product'
 
 
 const resolvers = {
@@ -24,6 +25,13 @@ const resolvers = {
       const loginUser = new Login()
       loginUser.userLogin({email, password});
     },
+
+    createProducts: async (_, {product}, context) => {
+      // if(!context.user) throw new Error(`You don't have authorization`);
+      const newProduct = new Products()
+      return await newProduct.createProduct({product});
+    },
+
   },
 };
 

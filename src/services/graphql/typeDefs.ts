@@ -73,6 +73,29 @@ const types = gql`
     newUser: User!
   }
 
+  input ProductInput {
+    name: String!
+    price: Float!
+    description: String
+    quantity: Int!
+  }
+
+  type Product {
+    id: ID!
+    name: String!
+    price: Float!
+    description: String
+    quantity: Int!
+    image: String
+  }
+
+  input ProductUpdateinput {
+   name: String
+   price: Float
+   description: String
+   image: String 
+  }
+
   type Query {
     users: [User]
     user(id: ID!): User
@@ -90,6 +113,9 @@ const types = gql`
     addClient(clientInput: ClientInput!): Boolean
     updateClient(clientUpdateInput: ClientUpdateInput!): Boolean
     deleteClient(id: ID!): Boolean
+    createProducts(product: ProductInput): Product
+    updateProduct(productUpdateinput: ProductUpdateinput): Product
+    deleteProduct(id: ID!): Boolean
   }
 `;
 

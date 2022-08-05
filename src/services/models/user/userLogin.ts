@@ -1,5 +1,5 @@
 const User = require('../../schemas/user/User')
-import { createToken, decryptedPassword } from "../../../../auth";
+import { createToken, decryptedPassword } from "../../../auth";
 
 export class Login {
     async userLogin({ email, password}): Promise<{}> {

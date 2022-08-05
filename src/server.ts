@@ -1,9 +1,9 @@
 import { ApolloServer } from 'apollo-server';
 import { verifyToken } from './auth';
 const {ApolloServerPluginLandingPageLocalDefault } = require('apollo-server-core');
-const typeDefs = require('./src/services/graphql/typeDefs')
-import resolvers from './src/services/graphql/resolvers'
-require('./src/database/database')
+const typeDefs = require('./services/graphql/typeDefs')
+import resolvers from './services/graphql/resolvers'
+require('./database/database')
 
 
 
@@ -20,4 +20,3 @@ const server = new ApolloServer({
 server.listen().then(({ url }) => {
     console.log(`🚀  Server ready at ${url}`);
 });
-
