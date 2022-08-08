@@ -13,8 +13,9 @@ const server = new ApolloServer({
     csrfPrevention: true,
     cache: 'bounded',
     context: ({req}) => {
-        const token = req.get('Authorization') || '';;
-        return { auth: verifyToken(token.replace('Bearer ', '')) }
+        const token = req.get('Authorization') || '';
+        const result = { auth: verifyToken(token.replace('Bearer ', '')) }
+        return result;
     }, 
 });
 server.listen().then(({ url }) => {
