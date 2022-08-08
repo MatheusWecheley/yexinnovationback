@@ -1,5 +1,5 @@
 const User = require('../schemas/user/User');
-import {Users} from '../models/user/User'
+import { Users } from '../models/user/User'
 import { Login } from '../models/user/userLogin';
 import {Products} from '../models/product/product'
 
