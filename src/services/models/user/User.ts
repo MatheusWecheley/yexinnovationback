@@ -1,5 +1,5 @@
 const User = require('../../schemas/user/User');
-import {hashedPassword,createToken,} from '../../../../auth';
+import {hashedPassword,createToken,} from '../../../auth';
 import { IUserInterface } from '../../src/userService';
 
 
@@ -19,7 +19,7 @@ export class Users implements IUserInterface  {
                 email: user.email,
             });
             if (userVerify) {
-              throw new Error(`User has existed`);
+              throw new Error(`User already exists`);
             }
             const newUser = await new User({
                 name: user.name,
