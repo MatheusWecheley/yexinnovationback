@@ -1,6 +1,6 @@
-import { Model } from "mongoose";
-import { Client } from "services/models/client/Client";
-import { ClientModel } from "services/schemas/client/Client";
+import { Model } from 'mongoose';
+import { Client } from 'services/models/client/Client';
+import { ClientModel } from 'services/schemas/client/Client';
 
 export interface IClientRepo {
   addClient(clientInput: Client): Promise<boolean>;
@@ -44,7 +44,7 @@ export class ClientRepo implements IClientRepo {
     after: string,
     filter: Partial<Client>
   ): Promise<Client[]> {
-    throw new Error("Method not implemented");
+    throw new Error('Method not implemented');
   }
 
   async updateClient(
