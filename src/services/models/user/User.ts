@@ -49,7 +49,7 @@ export class Users implements IUserInterface  {
             useFindAndModify: false
           })
           await update.save()
-          return true
+          return {User}
         }
       } catch (err) {
         return false

@@ -32,6 +32,12 @@ const resolvers = {
       return await newProduct.createProduct({product});
     },
 
+    updateProducts:                    async (_, {id, product}, context) => {
+      const update = new Products();
+      await update.updateProduct(id,product)
+      return {update};
+    }
+
   },
 };
 
