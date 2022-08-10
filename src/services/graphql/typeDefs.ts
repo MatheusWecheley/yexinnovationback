@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server');
+import { gql } from 'apollo-server';
 
 export default gql`
   directive @auth(requires: Role = ADMIN) on OBJECT | FIELD_DEFINITION
@@ -9,7 +9,7 @@ export default gql`
     USER
   }
 
-  type User @auth(requires: USER){
+  type User @auth(requires: USER) {
     id: ID!
     name: String!
     lastName: String!
@@ -22,7 +22,7 @@ export default gql`
     name: String
     lastName: String
     phone: Int
-    email: String 
+    email: String
     password: String
   }
 
@@ -90,20 +90,17 @@ export default gql`
   }
 
   input ProductUpdateinput {
-   name: String
-   price: Float
-   description: String
-   image: String 
+    name: String
+    price: Float
+    description: String
+    image: String
   }
 
   type Query {
     users: [User]
     user(id: ID!): User
     getClient(id: ID!): Client!
-    listClients(
-      first: Int
-      after: String
-    ): [Client]
+    listClients(first: Int, after: String): [Client]
   }
 
   type Mutation {
