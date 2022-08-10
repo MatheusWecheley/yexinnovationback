@@ -90,6 +90,7 @@ export default gql`
   }
 
   input ProductUpdateinput {
+    id: ID!
     name: String
     price: Float
     description: String
@@ -111,7 +112,7 @@ export default gql`
     updateClient(clientUpdateInput: ClientUpdateInput!): Boolean
     deleteClient(id: ID!): Boolean
     createProducts(product: ProductInput): Product
-    updateProducts(id: String, productUpdateinput: ProductUpdateinput): Product
+    updateProducts(productUpdateinput: ProductUpdateinput): Product
     deleteProduct(id: ID!): Boolean
   }
 `;

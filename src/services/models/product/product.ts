@@ -1,7 +1,15 @@
 const Product = require('../../schemas/product/Products')
 import mongoose from 'mongoose'
 
+export type Product = {
+    id: string,
+    name: string,
+    price: number,
+    description: string,
+}
+
 export type ProductInput = {
+    id: string,
     name?: String
     price?: Number
     description?: String
@@ -30,8 +38,11 @@ export class Products {
             throw new Error(err.message)
         }
     }
-    async updateProduct(id: string, ProductInput: ProductInput): Promise<boolean | object> {
-        const update = await Product.findByIdAndUpdate()
+    async updateProduct({id, ...ProductInput}: ProductInput): Promise<Product | null> {
+        const update = await Product.findByIdAndUpdate(id, ProductInput, {
+            new: true,
+            useFindAndModify: false
+          })
         return update;
     }
 }
