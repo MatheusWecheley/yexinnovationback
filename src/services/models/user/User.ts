@@ -48,8 +48,7 @@ export class Users implements IUserInterface  {
             new: true,
             useFindAndModify: false
           })
-          await update.save()
-          return true
+          return update
         }
       } catch (err) {
         return false

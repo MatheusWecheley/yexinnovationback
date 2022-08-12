@@ -1,6 +1,6 @@
-const { gql } = require('apollo-server');
+import { gql } from 'apollo-server';
 
-const types = gql`
+export default gql`
   directive @auth(requires: Role = ADMIN) on OBJECT | FIELD_DEFINITION
 
   enum Role {
@@ -9,7 +9,7 @@ const types = gql`
     USER
   }
 
-  type User @auth(requires: USER){
+  type User @auth(requires: USER) {
     id: ID!
     name: String!
     lastName: String!
@@ -22,7 +22,7 @@ const types = gql`
     name: String
     lastName: String
     phone: Int
-    email: String 
+    email: String
     password: String
   }
 
@@ -90,33 +90,29 @@ const types = gql`
   }
 
   input ProductUpdateinput {
-   name: String
-   price: Float
-   description: String
-   image: String 
+    id: ID!
+    name: String
+    price: Float
+    description: String
+    image: String
   }
 
   type Query {
     users: [User]
     user(id: ID!): User
     getClient(id: ID!): Client!
-    listClients(
-      first: Int
-      after: String
-    ): [Client]
+    listClients(first: Int, after: String): [Client]
   }
 
   type Mutation {
     createUsers(user: UserInput): AuthUser!
-    updateUser(id: String, user: UserInput): AuthUser
+    updateUser(id: String, user: UserInput): User
     login(email: String!, senha: String!): AuthUser!
     addClient(clientInput: ClientInput!): Boolean
     updateClient(clientUpdateInput: ClientUpdateInput!): Boolean
     deleteClient(id: ID!): Boolean
     createProducts(product: ProductInput): Product
-    updateProduct(productUpdateinput: ProductUpdateinput): Product
+    updateProducts(productUpdateinput: ProductUpdateinput): Product
     deleteProduct(id: ID!): Boolean
   }
 `;
-
-module.exports = types;
