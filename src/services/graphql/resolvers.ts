@@ -14,10 +14,16 @@ const resolvers = {
       return await UserModel.findById(id);
     }
   },
+
   Mutation: {
     createUsers: async (_, { user }) => {
       const newUser = new Users();
       return await newUser.createUser({ user });
+    },
+
+    deleteUsers: async (_, {UserDelete}) => {
+      const userDelete = new Users();
+      return await userDelete.deleteUser(UserDelete)
     },
 
     login: async (_, { email, password }) => {
@@ -34,7 +40,13 @@ const resolvers = {
     updateProducts: async (_, {productUpdateinput}, context) => {
       const update = new Products();
       return await update.updateProduct(productUpdateinput);
+    },
+
+    deleteProducts: async( _, {ProductDeleteInput}) => {
+      const productDelete = new Products();
+      return await productDelete.deleteProduct(ProductDeleteInput);
     }
+
   },
 };
 

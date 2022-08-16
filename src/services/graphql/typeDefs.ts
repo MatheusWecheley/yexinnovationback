@@ -97,6 +97,16 @@ export default gql`
     image: String
   }
 
+  input UserDelete {
+    id: ID
+    name: String!
+  }
+  
+  input ProductDeleteInput {
+    id: ID!
+    name: String
+  }
+
   type Query {
     users: [User]
     user(id: ID!): User
@@ -107,12 +117,13 @@ export default gql`
   type Mutation {
     createUsers(user: UserInput): AuthUser!
     updateUser(id: String, user: UserInput): User
+    deleteUsers(UserDelete: UserDelete): Boolean
     login(email: String!, senha: String!): AuthUser!
     addClient(clientInput: ClientInput!): Boolean
     updateClient(clientUpdateInput: ClientUpdateInput!): Boolean
     deleteClient(id: ID!): Boolean
     createProducts(product: ProductInput): Product
     updateProducts(productUpdateinput: ProductUpdateinput): Product
-    deleteProduct(id: ID!): Boolean
+    deleteProducts(ProductDeleteInput: ProductDeleteInput): Boolean
   }
 `;

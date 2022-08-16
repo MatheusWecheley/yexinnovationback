@@ -3,6 +3,11 @@ import {hashedPassword,createToken,} from '../../../auth';
 import { IUserInterface } from '../../src/userService';
 
 
+export type UserDelete = {
+  id?: String
+  name?: String
+}
+
 export type UserInput = {
   name?: string
   lastName?: string
@@ -49,6 +54,18 @@ export class Users implements IUserInterface  {
             useFindAndModify: false
           })
           return update
+        }
+      } catch (err) {
+        return false
+      }
+    }
+
+    async deleteUser({id, ...UserDelete}: UserDelete): Promise<boolean> {
+      try {
+        const userVerify = await User.findById(id);
+        if(userVerify) {
+          const userDelete = await User.findOneAndDelete({name: UserDelete});
+          return true
         }
       } catch (err) {
         return false
