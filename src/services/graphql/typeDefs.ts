@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server');
+import { gql } from 'apollo-server';
 
 export default gql`
   directive @auth(requires: Role = ADMIN) on OBJECT | FIELD_DEFINITION
@@ -9,7 +9,7 @@ export default gql`
     USER
   }
 
-  type User @auth(requires: USER){
+  type User @auth(requires: USER) {
     id: ID!
     name: String!
     lastName: String!
@@ -22,7 +22,7 @@ export default gql`
     name: String
     lastName: String
     phone: Int
-    email: String 
+    email: String
     password: String
   }
 
@@ -90,98 +90,40 @@ export default gql`
   }
 
   input ProductUpdateinput {
-   name: String
-   price: Float
-   description: String
-   image: String 
+    id: ID!
+    name: String
+    price: Float
+    description: String
+    image: String
+  }
+
+  input UserDelete {
+    id: ID
+    name: String!
+  }
+  
+  input ProductDeleteInput {
+    id: ID!
+    name: String
   }
 
   type Query {
     users: [User]
     user(id: ID!): User
     getClient(id: ID!): Client!
-    listClients(
-      first: Int
-      after: String
-    ): [Client]
+    listClients(first: Int, after: String): [Client]
   }
 
   type Mutation {
     createUsers(user: UserInput): AuthUser!
-    updateUser(id: String, user: UserInput): AuthUser
+    updateUser(id: String, user: UserInput): User
+    deleteUsers(UserDelete: UserDelete): Boolean
     login(email: String!, senha: String!): AuthUser!
     addClient(clientInput: ClientInput!): Boolean
     updateClient(clientUpdateInput: ClientUpdateInput!): Boolean
     deleteClient(id: ID!): Boolean
     createProducts(product: ProductInput): Product
-    updateProduct(productUpdateinput: ProductUpdateinput): Product
-    deleteProduct(id: ID!): Boolean
-  }
-
-  type ClientFilter {
-    limit: Int
-    node: [clientsFilter]
-  }
-
-  type ClientsConnection {
-    pageInfo: PageInfo!
-    totalCountL: Int!
-    nodes: [clients!]!
-  }
-
-  input ClientInput {
-    socialReason: String!
-    cnpj: String!
-    address: Address!
-    phone: String!
-    logo: String
-  }
-
-  input ClientUpdateInput {
-    id: ID!
-    socialReason: String
-    cnpj: String
-    address: Address
-    phone: String
-    logo: String
-  }
-
-  type Address {
-    zipCode: String!
-    street: String!
-    num: String!
-    Neighborhood: String!
-    complement: String
-    state: String!
-    city: String!
-  }
-
-  type Client {
-    id: ID!
-    socialReason: String!
-    cnpj: String!
-    address: Address!
-    phone: String!
-    logo: String
-    rating: Int
-    feedbacks: [String]
-  }
-
-  type Query {
-    users: [User]
-    user(id: ID!): User
-    getClient(id: ID!): Client!
-    listClients(
-      first: Int
-      after: String
-      clientsFilter: ClientsFilter
-    ): ClientsConnection
-  }
-
-  type Mutation {
-    createUser(user: UserInput): User
-    addClient(clientInput: ClientInput!): Boolean
-    updateClient(clientUpdateInput: ClientUpdateInput!): Boolean
-    deleteClient(id: ID!): Boolean
+    updateProducts(productUpdateinput: ProductUpdateinput): Product
+    deleteProducts(ProductDeleteInput: ProductDeleteInput): Boolean
   }
 `;

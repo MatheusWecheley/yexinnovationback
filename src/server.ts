@@ -1,9 +1,17 @@
 import { ApolloServer } from 'apollo-server';
 import { verifyToken } from './auth';
 const {ApolloServerPluginLandingPageLocalDefault } = require('apollo-server-core');
-const typeDefs = require('./services/graphql/typeDefs')
+import typeDefs from './services/graphql/typeDefs'
 import resolvers from './services/graphql/resolvers'
-require('./database/database')
+const mongoose = require('mongoose');
+
+mongoose.Promise = Promise;
+
+mongoose.connect('mongodb://localhost/1_0', { 
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => console.log('Connected to Mongoose Sucess!'))
+.catch((err) => console.error(err))
 
 
 
@@ -13,8 +21,9 @@ const server = new ApolloServer({
     csrfPrevention: true,
     cache: 'bounded',
     context: ({req}) => {
-        const token = req.get('Authorization') || '';;
-        return { auth: verifyToken(token.replace('Bearer ', '')) }
+        const token = req.get('Authorization') || '';
+        const result = { auth: verifyToken(token.replace('Bearer ', '')) }
+        return result;
     }, 
 });
 server.listen().then(({ url }) => {
